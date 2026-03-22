@@ -23,5 +23,11 @@ export default {
         pass: process.env.EMAIL_PASS as string,
     },
 
+    cloudinary: {
+        cloud_name: process.env.CLOUDINARY_CLOUD_NAME as string,
+        api_key: process.env.CLOUDINARY_API_KEY as string,
+        api_secret: process.env.CLOUDINARY_API_SECRET as string,
+    },
+
     client_url: process.env.CLIENT_URL || "http://localhost:5500",
 };

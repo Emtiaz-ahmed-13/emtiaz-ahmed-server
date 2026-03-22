@@ -1,4 +1,4 @@
-import jwt, { Secret, SignOptions } from "jsonwebtoken";
+import jwt, { Secret } from "jsonwebtoken";
 
 const generateToken = (
     payload: Record<string, unknown>,
@@ -9,11 +9,7 @@ const generateToken = (
         throw new Error("JWT secret is missing");
     }
 
-    const options: SignOptions = {
-        expiresIn,
-    };
-
-    return jwt.sign(payload, secret, options);
+    return jwt.sign(payload, secret, { expiresIn } as any);
 };
 
 export const jwtHelper = {

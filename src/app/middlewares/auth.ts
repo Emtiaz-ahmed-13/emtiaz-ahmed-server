@@ -11,16 +11,17 @@ export interface AuthRequest extends Request {
     };
 }
 
-export const authMiddleware = (req: AuthRequest, res: Response, next: NextFunction) => {
+export const authMiddleware = (req: AuthRequest, res: Response, next: NextFunction): void => {
     try {
         // Token Authorization header theke nibo
         const token = req.headers.authorization?.split(' ')[1]; // "Bearer TOKEN"
 
         if (!token) {
-            return res.status(401).json({
+            res.status(401).json({
                 success: false,
                 message: 'Access denied. No token provided.',
             });
+            return;
         }
 
         // Token verify korbo
@@ -31,7 +32,7 @@ export const authMiddleware = (req: AuthRequest, res: Response, next: NextFuncti
         
         next();
     } catch (error) {
-        return res.status(401).json({
+        res.status(401).json({
             success: false,
             message: 'Invalid or expired token',
         });

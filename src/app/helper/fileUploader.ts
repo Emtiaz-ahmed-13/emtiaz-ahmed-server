@@ -24,7 +24,7 @@ cloudinary.config({
 
 const uploadToCloudinary = async (file: Express.Multer.File) => {
     return new Promise((resolve, reject) => {
-        cloudinary.uploader.upload(file.path, (err, result) => {
+        cloudinary.uploader.upload(file.path, (err: any, result: any) => {
             if (err) {
                 reject(err)
             } else {
