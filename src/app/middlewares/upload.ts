@@ -1,11 +1,15 @@
-// File Upload Middleware (Multer)
+// File Upload Middleware (Multer) - Serverless Compatible
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
+import os from 'os';
 
-// Upload directory create korbo jodi na thake
-const uploadDir = path.join(process.cwd(), 'uploads', 'projects');
-if (!fs.existsSync(uploadDir)) {
+// Use /tmp directory for serverless environments (Vercel, AWS Lambda, etc.)
+// This is the only writable directory in serverless
+const uploadDir = process.env.VERCEL ? os.tmpdir() : path.join(process.cwd(), 'uploads', 'projects');
+
+// Only create directory if not in serverless environment
+if (!process.env.VERCEL && !fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir, { recursive: true });
 }
 
