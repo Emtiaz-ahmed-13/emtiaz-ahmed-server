@@ -1,0 +1,27 @@
+model Project {
+  id          Int      @id @default(autoincrement())
+  title       String
+  slug        String   @unique
+  description String
+  longDesc    String   @db.Text
+  thumbnail   String
+  images      String[]
+  techStack   String[]
+  tags        String[]
+  liveUrl     String?
+  githubUrl   String?
+  featured    Boolean  @default(false)
+  order       Int      @default(0)
+  likes       Int      @default(0)
+  status      ProjectStatus @default(COMPLETED)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("projects")
+}
+
+enum ProjectStatus {
+  COMPLETED
+  IN_PROGRESS
+  ARCHIVED
+}

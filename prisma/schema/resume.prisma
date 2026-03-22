@@ -1,0 +1,8 @@
+model ResumeDownload {
+  id           Int      @id @default(autoincrement())
+  ipAddress    String
+  userAgent    String?
+  downloadedAt DateTime @default(now())
+
+  @@map("resume_downloads")
+}
